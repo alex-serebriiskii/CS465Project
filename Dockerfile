@@ -9,7 +9,6 @@ RUN apt-get upgrade
 RUN apt-get update
 RUN apt-get install -y nodejs npm
 
-COPY . /app
 WORKDIR /app
 
 EXPOSE 9456
@@ -19,5 +18,5 @@ EXPOSE 9458
 RUN dotnet --info
 RUN npm --version
 
-ENTRYPOINT ["dotnet", "run"]
+ENTRYPOINT ["dotnet", "watch", "run"]
 
