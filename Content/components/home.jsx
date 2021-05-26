@@ -1,19 +1,19 @@
-import { Component, Fragment } from "react";
 import {
-  Link,
   BrowserRouter,
-  Route,
-  Switch,
-  StaticRouter,
+  Link,
   Redirect,
+  Route,
+  StaticRouter,
+  Switch,
 } from "react-router-dom";
-import { Helmet } from "react-helmet";
+import React, { Component, Fragment } from "react";
 
 import { CommentsBox } from "./comments/Sample.jsx";
-import { StyledComponentsDemo } from "./styled-components.jsx";
 import { EmotionDemo } from "./emotion.jsx";
-import { ReactJssDemo } from "./react-jss.jsx";
+import { Helmet } from "react-helmet";
 import { LazyLoadDemo } from "./lazy-load.jsx";
+import { ReactJssDemo } from "./react-jss.jsx";
+import { StyledComponentsDemo } from "./styled-components.jsx";
 
 class Navbar extends Component {
   render() {

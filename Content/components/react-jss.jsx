@@ -1,6 +1,7 @@
 import React, { Fragment } from "react";
-import injectSheet from "react-jss";
+
 import { Helmet } from "react-helmet";
+import injectSheet from "react-jss";
 
 const styles = {
   demoTitle: {
@@ -20,7 +21,7 @@ const styles = {
   },
 };
 
-const DemoTitle = ({ classes, children }) => (
+const DemoTitle = ({ classes }) => (
   <h1 className={classes.demoTitle}>
     Hello from <a href="https://github.com/cssinjs/react-jss">React-JSS</a>!
   </h1>

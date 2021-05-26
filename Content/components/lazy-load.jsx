@@ -1,4 +1,5 @@
-import React, { Fragment, useState, useEffect } from "react";
+import React, { Fragment, useEffect, useState } from "react";
+
 import { Helmet } from "react-helmet";
 
 export function LazyLoadDemo() {

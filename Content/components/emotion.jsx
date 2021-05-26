@@ -1,6 +1,7 @@
 import React, { Fragment } from "react";
-import styled from "react-emotion";
+
 import { Helmet } from "react-helmet";
+import styled from "react-emotion";
 
 const BlueTitle = styled("h1")`
   color: #222;
