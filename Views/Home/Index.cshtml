@@ -6,10 +6,12 @@
 @{
 	Layout = "_Layout";
 	var helmetFunctions = new ReactHelmetFunctions();
+	var reactJssFunctions = new ReactJssFunctions();
 
-	var chainedFunctions = new ChainedRenderFunctions(helmetFunctions);
+	var chainedFunctions = new ChainedRenderFunctions(reactJssFunctions, helmetFunctions);
 }
 @Html.ReactRouter("Components.RootComponent", new { initialComments = Model.Comments, page = Model.Page }, renderFunctions: chainedFunctions)
 @{
+	ViewBag.ServerStyles = reactJssFunctions.RenderedStyles;
 	ViewBag.HelmetTitle = helmetFunctions.RenderedHelmet?.GetValueOrDefault("title");
 }

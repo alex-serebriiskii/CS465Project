@@ -8,11 +8,13 @@ import React from "react";
 export default class RootComponent extends React.Component {
   render() {
     const app = (
-      <Switch>
-        <Route exact path="/" component={IndexPage} />
-        <Route exact path="/chat" component={ChatPage} />
-        <Route path="*" component={NotFoundPage} />
-      </Switch>
+      <>
+        <Switch>
+          <Route exact path="/" component={IndexPage} />
+          <Route exact path="/chat" component={ChatPage} />
+          <Route path="*" component={NotFoundPage} />
+        </Switch>
+      </>
     );
 
     if (typeof window === "undefined") {
