@@ -1,4 +1,18 @@
-﻿html, body, div, span, applet, object, iframe,
+﻿:root {
+	--red: #ef3340;
+	--red-1: #f14e5a;
+	--red-2: #f36874;
+
+	--blue: #00a3e0;
+	--blue-1: #3cb1e2;
+	--blue-2: #78bfe3;
+
+	--black: #333333;
+	--black-1: #aaabb2;
+	--black-2: #d1d2dc;
+}
+
+html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
 del, dfn, em, img, ins, kbd, q, s, samp,

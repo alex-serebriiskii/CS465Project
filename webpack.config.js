@@ -31,6 +31,18 @@ module.exports = {
 				exclude: /node_modules/,
 				loader: 'babel-loader',
 			},
+			{
+				test: /\.(png|jpg|jpeg|gif)$/i,
+				loader: 'file-loader',
+			},
+			{
+				test: /\.(woff|woff2|eot|ttf|otf)$/i,
+				loader: 'file-loader',
+			},
+			{
+				test: /\.svg$/,
+				use: ['@svgr/webpack'],
+			},
 		],
 	},
 	plugins: [
