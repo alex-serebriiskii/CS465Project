@@ -110,29 +110,6 @@ export const IndexPageStyles = {
       display: "flex",
       flexDirection: "column",
       color: "var(--gray-3)",
-      "& label": {
-        margin: "0.5em 0",
-      },
-      "& input": {
-        background: "var(--gray-2)",
-        borderRadius: "5px",
-        padding: "1em",
-        outline: "none",
-        border: "3px solid transparent",
-        "&:focus": {
-          border: "3px solid var(--blue)",
-        },
-        "&:active": {
-          border: "3px solid var(--blue)",
-        },
-        "&.invalid": {
-          border: "3px solid var(--red)",
-        },
-      },
-      "& span": {
-        color: "var(--red-1)",
-        height: "1.5em",
-      },
       "& button": {
         width: "10em",
         margin: {

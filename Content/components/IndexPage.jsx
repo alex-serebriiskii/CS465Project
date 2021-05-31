@@ -1,9 +1,10 @@
 import * as Yup from "yup";
 
-import { ErrorMessage, Field, Form, Formik } from "formik";
+import { Form, Formik } from "formik";
 import React, { useEffect, useState } from "react";
 
 import { Button } from "./Button.jsx";
+import { FormField } from "./FormField.jsx";
 import { Helmet } from "react-helmet";
 import { IndexPageStyles } from "../jss/IndexPage.js";
 import Logo from "../svg/logo.svg";
@@ -16,25 +17,6 @@ const RegisterPage = Object.freeze({
   Login: 1,
   Signup: 2,
 });
-
-const FormField = ({ name, touched, errors }) => {
-  const lower = name.toLowerCase();
-  const type = lower === "confirm" ? "password" : lower;
-  return (
-    <>
-      <label htmlFor={lower}>{name}</label>
-      <Field
-        type={type}
-        name={lower}
-        id={lower}
-        className={touched[lower] && errors[lower] ? "invalid" : ""}
-      />
-      <span>
-        <ErrorMessage name={lower} />
-      </span>
-    </>
-  );
-};
 
 const LoginFormSchema = Yup.object().shape({
   username: Yup.string().min(3).max(24).required("Required"),
