@@ -1,13 +1,15 @@
 import * as Yup from "yup";
 
 import { ErrorMessage, Field, Form, Formik } from "formik";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import { Button } from "./Button.jsx";
 import { Helmet } from "react-helmet";
 import { IndexPageStyles } from "../jss/IndexPage.js";
 import Logo from "../svg/logo.svg";
 import injectSheet from "react-jss";
+
+import { __bp_medium__ } from '../constants.js';
 
 const RegisterPage = Object.freeze({
   None: 0,
@@ -143,6 +145,21 @@ const Register = ({ pageHook }) => {
 export const IndexPage = injectSheet(IndexPageStyles)(({ classes }) => {
   const [page, setPage] = useState(RegisterPage.None);
 
+  useEffect(() => {
+    const handler = () => {
+      const width = window.innerWidth;
+      if (width > __bp_medium__ && page === RegisterPage.None) {
+        setPage(RegisterPage.Signup);
+        return;
+      }
+    };
+
+    window.addEventListener('resize', handler);
+    handler();
+
+    return () => window.removeEventListener('resize', handler);
+  });
+
   return (
     <>
       <Helmet>
@@ -172,7 +189,9 @@ export const IndexPage = injectSheet(IndexPageStyles)(({ classes }) => {
           </div>
         </div>
         {page !== RegisterPage.None ? (
-          <Register pageHook={[page, setPage]} />
+          <div className="pageWrapper">
+            <Register pageHook={[page, setPage]} />
+          </div>
         ) : (
           <></>
         )}

@@ -13,6 +13,9 @@
 	--gray-1: #d1d2dc;
 	--gray-2: #c4c4c4;
 	--gray-3: #e5e5e5;
+
+	--thumbBG: var(--gray-2);
+	--scrollbarBG: var(--black);
 }
 
 /* sora-regular - latin */
@@ -47,6 +50,7 @@
 	font-family: 'Sora', sans-serif;
 }
 
+/* Reset CSS */
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -98,3 +102,21 @@ table {
 	border-collapse: collapse;
 	border-spacing: 0;
 }
+
+/* Scrollbar styles */
+::-webkit-scrollbar {
+  width: 11px;
+}
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--thumbBG) var(--scrollbarBG);
+}
+::-webkit-scrollbar-track {
+  background: var(--scrollbarBG);
+}
+::-webkit-scrollbar-thumb {
+  background-color: var(--thumbBG) ;
+  border-radius: 6px;
+  border: 3px solid var(--scrollbarBG);
+}
+

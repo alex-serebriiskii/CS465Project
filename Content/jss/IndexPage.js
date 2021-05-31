@@ -1,8 +1,10 @@
+import { minMedium } from "../constants.js";
+
 export const IndexPageStyles = {
   wrapper: {
     "& .brand": {
       padding: {
-        top: "4em",
+        top: "3em",
         bottom: "4em",
       },
       "& .name": {
@@ -43,12 +45,13 @@ export const IndexPageStyles = {
       },
     },
     "& .page": {
-      position: "absolute",
+      position: "fixed",
       top: "0",
       left: "0",
       width: "100%",
       height: "100vh",
       zIndex: "1",
+      overflowY: 'scroll',
       background: "var(--black)",
       display: "flex",
       flexDirection: "column",
@@ -101,8 +104,9 @@ export const IndexPageStyles = {
       },
     },
     "& form": {
-      width: "20em",
+      width: "18em",
       margin: "0 auto",
+      padding: "1em 0",
       display: "flex",
       flexDirection: "column",
       color: "var(--gray-3)",
@@ -136,6 +140,44 @@ export const IndexPageStyles = {
           bottom: "1em",
           left: "auto",
           right: "auto",
+        },
+      },
+    },
+  },
+  [minMedium]: {
+    wrapper: {
+      display: 'flex',
+      justifyContent: 'space-around',
+      width: '100vw',
+      maxWidth: '1200px',
+      margin: '0 auto',
+      "& .buttons": {
+        display: 'none',
+      },
+      "& .brand": {
+        marginTop: '7em',
+      },
+      '& .pageWrapper': {
+        background: 'var(--black)',
+        position: "relative",
+        padding: {
+          top: '1em',
+          bottom: '1em',
+          left: 'calc(11px + 1em)',
+          right: '1em',
+        },
+        marginTop: '5em',
+        borderRadius: '10px',
+        '-webkit-box-shadow': '2px 2px 4px 4px #00000019',
+        'box-shadow': '2px 2px 4px 4px #00000019',
+      },
+      "& .page": {
+        position: 'relative',
+        padding: '1em',
+        width: "500px",
+        height: "600px",
+        "& .logo": {
+          display: 'none',
         },
       },
     },
