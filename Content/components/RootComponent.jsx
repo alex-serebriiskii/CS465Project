@@ -2,6 +2,7 @@ import { BrowserRouter, Route, StaticRouter, Switch } from "react-router-dom";
 
 import { ChatPage } from "./ChatPage.jsx";
 import { IndexPage } from "./IndexPage.jsx";
+import { ForgotPasswordPage } from "./ForgotPasswordPage.jsx";
 import { NotFoundPage } from "./NotFoundPage.jsx";
 import React from "react";
 
@@ -12,6 +13,7 @@ export default class RootComponent extends React.Component {
         <Switch>
           <Route exact path="/" component={IndexPage} />
           <Route exact path="/chat" component={ChatPage} />
+          <Route exact path="/forgot" component={ForgotPasswordPage} />
           <Route path="*" component={NotFoundPage} />
         </Switch>
       </>

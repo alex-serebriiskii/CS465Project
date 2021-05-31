@@ -1,36 +1,59 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
+import { Helmet } from "react-helmet";
 import injectSheet from "react-jss";
 
-import { __bp_small__ } from "../constants.js";
+import { __bp_medium__ } from "../constants.js";
 
 import { IndexPageStyles } from "../jss/IndexPage.js";
 
 import Logo from "../svg/logo.svg";
+import { Button } from "./Button.jsx";
 
 const RegisterPage = Object.freeze({
+  None: 0,
   Login: 1,
   Signup: 2,
 })
 
 const Login = ({ setPage }) => {
   return (
-    <>
-      <h1>Login</h1>
-      <button onClick={() => setPage(RegisterPage.Signup)}>
-        Signup
+    <div className="page login">
+      <button className="logo" onClick={() => setPage(RegisterPage.None)}>
+        <Logo />
       </button>
-    </>
+      <h1 className="title">Log in</h1>
+      <button className="instead" onClick={() => setPage(RegisterPage.Signup)}>
+        Sign up instead
+      </button>
+      <form>
+        inputs
+      </form>
+      <div className='action'>
+        <Button color='blue' onClick={() => alert("SIGN UP")}>Sign up</Button>
+      </div>
+      <a href="/forgot">Forgot password?</a>
+    </div>
   )
 };
 
 const Signup = ({ setPage }) => {
   return (
-    <>
-      <h1>Signup</h1>
-      <button onClick={() => setPage(RegisterPage.Login)}>
-        Login
+    <div className="page signup">
+      <button className="logo" onClick={() => setPage(RegisterPage.None)}>
+        <Logo />
       </button>
-    </>
+      <h1 className="title">Sign up</h1>
+      <button className="instead" onClick={() => setPage(RegisterPage.Login)}>
+        Log in instead
+      </button>
+      <form>
+        inputs
+      </form>
+      <div className='action'>
+        <Button color='red' onClick={() => alert("LOG IN")}>Log in</Button>
+      </div>
+      <a href="/forgot">Forgot password?</a>
+    </div>
   )
 };
 
@@ -49,37 +72,35 @@ const Register = ({ pageHook }) => {
 };
 
 export const IndexPage = injectSheet(IndexPageStyles)(({ classes }) => {
-  const [page, setPage] = useState(RegisterPage.Signup);
-  const [showRegister, setShowRegister] = useState(true);
-
-  useEffect(() => {
-    const handler = () => {
-      const width = window.innerWidth;
-      //const height = window.innerHeight;
-
-      if (width < __bp_small__) {
-        setShowRegister(false);
-        return;
-      }
-      setShowRegister(true);
-    };
-
-    window.addEventListener("resize", handler);
-    handler();
-    return () => window.removeEventListener("resize", handler);
-  }, []);
+  const [page, setPage] = useState(RegisterPage.None);
 
   return (
-    <div className={classes.wrapper}>
-      <div className={classes.brand}>
-        <Logo />
-        <h1>Discordium</h1>
-        <p>Secure <b>your</b> chats</p>
+    <>
+      <Helmet>
+        <title>Discordium</title>
+        <meta name="description" content="Secure your chats - homepage" />
+      </Helmet>
+      <div className={classes.wrapper}>
+        <div className='brand'>
+          <div className='name'>
+            <Logo />
+            <h1>Discordium</h1>
+          </div>
+          <p>Secure <b>your</b> chats</p>
+        </div>
+        <div className='buttons'>
+          <div>
+            <Button color='blue' onClick={() => setPage(RegisterPage.Signup)}>Sign up</Button>
+          </div>
+          <div>
+            <Button color='red' onClick={() => setPage(RegisterPage.Login)}>Log in</Button>
+          </div>
+        </div>
+        {page !== RegisterPage.None
+          ? <Register pageHook={[page,setPage]} />
+          : <></>}
       </div>
-      {showRegister
-        ? <Register className={classes.register} pageHook={[page,setPage]} />
-        : <></>}
-    </div>
+    </>
   );
 });
 
