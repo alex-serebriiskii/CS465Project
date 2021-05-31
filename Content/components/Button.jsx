@@ -1,12 +1,17 @@
+import { ButtonStyles } from "../jss/Button.js";
 import React from "react";
 import injectSheet from "react-jss";
 
-import { ButtonStyles } from "../jss/Button.js";
-
-export const Button = injectSheet(ButtonStyles)(({ classes, children, onClick, color }) => {
+export const Button = injectSheet(ButtonStyles)((props) => {
+  const { classes, children, onClick, color, disabled, type } = props;
   return (
-    <button onClick={onClick} className={`${classes.wrapper} ${color}`}>
+    <button
+      onClick={onClick}
+      className={`${classes.wrapper} ${color}`}
+      disabled={disabled}
+      type={type}
+    >
       {children}
     </button>
-  )
+  );
 });

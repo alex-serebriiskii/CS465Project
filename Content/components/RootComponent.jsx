@@ -1,8 +1,8 @@
 import { BrowserRouter, Route, StaticRouter, Switch } from "react-router-dom";
 
 import { ChatPage } from "./ChatPage.jsx";
-import { IndexPage } from "./IndexPage.jsx";
 import { ForgotPasswordPage } from "./ForgotPasswordPage.jsx";
+import { IndexPage } from "./IndexPage.jsx";
 import { NotFoundPage } from "./NotFoundPage.jsx";
 import React from "react";
 

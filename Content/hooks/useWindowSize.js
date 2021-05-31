@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 
 export const useWindowSize = () => {
   // Initialize state with undefined width/height so server and client renders match
@@ -24,4 +24,4 @@ export const useWindowSize = () => {
     return () => window.removeEventListener("resize", handleResize);
   }, []); // Empty array ensures that effect is only run on mount
   return windowSize;
-}
+};
