@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 
-namespace React.Sample.Webpack.CoreMvc
+namespace Discordium 
 {
 	public class Program
 	{

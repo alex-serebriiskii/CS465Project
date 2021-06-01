@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 
-namespace React.Sample.Webpack.CoreMvc.Controllers
+namespace Discordium
 {
 	public class HomeController : Controller
 	{

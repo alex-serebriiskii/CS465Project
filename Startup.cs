@@ -7,7 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using React.AspNet;
 
-namespace React.Sample.Webpack.CoreMvc
+namespace Discordium
 {
 	public class Startup
 	{
@@ -28,7 +28,8 @@ namespace React.Sample.Webpack.CoreMvc
 
 			services.AddReact();
 			services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-
+			services.AddSingleton<IAuthService,AuthService>();
+			services.AddSignalR();
 			// Build the intermediate service provider then return it
 			services.BuildServiceProvider();
 		}
@@ -57,9 +58,19 @@ namespace React.Sample.Webpack.CoreMvc
 
 			app.UseEndpoints(endpoints =>
 			{
+
+				endpoints.MapControllerRoute(
+					"login",
+					"/accounts/register",
+					new {controller = "Account", action = "Login"}
+				);
+				endpoints.MapControllerRoute(
+					"register",
+					"/accounts/register",
+					new {controller = "Account",action = "Register"}
+				);
+				endpoints.MapHub<MessageHub>("/messages");
 				endpoints.MapControllerRoute("default", "{path?}", new { controller = "Home", action = "Index" });
-				endpoints.MapControllerRoute("comments-root", "comments", new { controller = "Home", action = "Index" });
-				endpoints.MapControllerRoute("comments", "comments/page-{page}", new { controller = "Home", action = "Comments" });
 			});
 		}
 	}
