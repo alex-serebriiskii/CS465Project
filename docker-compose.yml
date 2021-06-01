@@ -1,7 +1,14 @@
 services:
   app:
-    build: .
+    build: ./Docker/
+    privileged: true
     ports:
       - "9456:9456"
       - "9457:9457"
       - "9458:9458"
+    volumes:
+      - ./:/app
+      - ./Docker/.bashrc:/root/.bashrc:ro
+    init: true
+    command:
+      ["-c", "tail -F /dev/null"]

@@ -4,6 +4,8 @@
   </PropertyGroup>
   <ItemGroup>
     <Folder Include="wwwroot\" />
+    <Watch Include="**\*.jsx" Exclude="node_modules\**\*;build\*" />
+    <Watch Include="**\*.js" Exclude="node_modules\**\*;build\*" />
   </ItemGroup>
 
   <ItemGroup>
