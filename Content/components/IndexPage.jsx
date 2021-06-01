@@ -61,6 +61,7 @@ const SignupForm = () => {
         <Form onSubmit={onSubmit} action="/accounts/register" method="POST">
           <FormField name="Username" touched={touched} errors={errors} />
           <FormField name="Password" touched={touched} errors={errors} />
+          <FormField name="Confirm" touched={touched} errors={errors} />
           <Button color="blue" type="submit" disabled={isSubmitting}>
             Sign up
           </Button>
