@@ -61,7 +61,7 @@ namespace Discordium
 
 				endpoints.MapControllerRoute(
 					"login",
-					"/accounts/register",
+					"/accounts/login",
 					new {controller = "Account", action = "Login"}
 				);
 				endpoints.MapControllerRoute(
