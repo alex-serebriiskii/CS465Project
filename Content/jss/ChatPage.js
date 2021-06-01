@@ -1,3 +1,5 @@
+const __chat_height__ = '120px';
+
 export const ChatPageStyles = {
   wrapper: {
     width: '100vw',
@@ -5,6 +7,7 @@ export const ChatPageStyles = {
     padding: '0 1em',
     margin: '0 auto',
     overflow: 'hidden',
+    height: `calc(100% - ${__chat_height__})`,
     '& .header': {
       width: '100%',
       padding: '1em',
@@ -13,11 +16,11 @@ export const ChatPageStyles = {
       alignItems: 'center',
     },
     '& .messages': {
-      height: 'calc(40vh - 30px - 2em)',
-      background: 'red',
+      height: '100%',
+      background: 'gray',
     },
     '& .chat-input': {
-      height: 'calc(20vh)',
+      height: __chat_height__,
       display: 'flex',
       position: 'fixed',
       bottom: '0',
@@ -41,12 +44,20 @@ export const ChatPageStyles = {
         },
         '& textarea': {
           width: '100%',
-          height: 'calc(20vh - 1.5em)',
+          height: '100%',
           borderTopLeftRadius: '5px',
           borderTopRightRadius: '5px',
           background: 'var(--gray-2)',
           border: 'none',
           resize: 'none',
+          '-webkit-appearance': 'none',
+          padding: {
+            top: "0.5em",
+            bottom: "3em",
+            left: "0.5em",
+            right: "0.5em",
+          },
+          fontSize: '1em',
         },
         '& button': {
           position: 'absolute',

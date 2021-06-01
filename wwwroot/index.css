@@ -74,12 +74,21 @@ article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
 	display: block;
 }
+
+html, body {
+  height: 100%;
+}
+
+/* React root */
+body > div {
+	height: 100%;
+}
+
 body {
 	font-family: 'Sora', sans-serif;
 	line-height: 1.5;
 	background-repeat: no-repeat;
 	background-size: auto;
-	min-height: 100vh;
 
 	--gradient-args: 160deg, var(--black) 55%, var(--gray-2) 55%;
 	background: -webkit-linear-gradient(var(--gradient-args));

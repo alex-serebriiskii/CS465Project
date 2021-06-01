@@ -44,7 +44,7 @@ const Messages = () => {
 };
 
 const MessageSchema = Yup.object().shape({
-  message: Yup.string().min(1).max(1024).required('Cannot send empty message'),
+  message: Yup.string().min(1).max(512).required('Cannot send empty message'),
 });
 
 const ChatInput = () => {
