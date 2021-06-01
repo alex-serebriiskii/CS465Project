@@ -29,15 +29,9 @@ const LoginForm = () => {
     <Formik
       initialValues={{ username: "", password: "" }}
       validationSchema={LoginFormSchema}
-      onSubmit={(values, { setSubmitting }) => {
-        setTimeout(() => {
-          alert(JSON.stringify(values, null, 2));
-          setSubmitting(false);
-        }, 400);
-      }}
     >
-      {({ handleSubmit, isSubmitting, errors, touched }) => (
-        <Form onSubmit={handleSubmit}>
+      {({ onSubmit, isSubmitting, errors, touched }) => (
+        <Form onSubmit={onSubmit} action="/accounts/login" method="POST">
           <FormField name="Username" touched={touched} errors={errors} />
           <FormField name="Password" touched={touched} errors={errors} />
           <Button color="red" type="submit" disabled={isSubmitting}>
@@ -62,15 +56,9 @@ const SignupForm = () => {
     <Formik
       initialValues={{ username: "", password: "", confirm: "" }}
       validationSchema={SignupFormSchema}
-      onSubmit={(values, { setSubmitting }) => {
-        setTimeout(() => {
-          alert(JSON.stringify(values, null, 2));
-          setSubmitting(false);
-        }, 400);
-      }}
     >
-      {({ handleSubmit, isSubmitting, errors, touched }) => (
-        <Form onSubmit={handleSubmit}>
+      {({ onSubmit, isSubmitting, errors, touched }) => (
+        <Form onSubmit={onSubmit} action="/accounts/register" method="POST">
           <FormField name="Username" touched={touched} errors={errors} />
           <FormField name="Password" touched={touched} errors={errors} />
           <FormField name="Confirm" touched={touched} errors={errors} />
