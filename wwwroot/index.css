@@ -87,6 +87,8 @@ body {
 	background: -moz-linear-gradient(var(--gradient-args));
 	background: linear-gradient(var(--gradient-args));
 }
+
+
 ol, ul {
 	list-style: none;
 }

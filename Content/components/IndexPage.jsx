@@ -4,6 +4,7 @@ import { Form, Formik } from "formik";
 import React, { useEffect, useState } from "react";
 
 import { Button } from "./Button.jsx";
+import { IconButton } from "./IconButton.jsx";
 import { FormField } from "./FormField.jsx";
 import { Helmet } from "react-helmet";
 import { IndexPageStyles } from "../jss/IndexPage.js";
@@ -85,13 +86,13 @@ const SignupForm = () => {
 const Login = ({ setPage }) => {
   return (
     <div className="page login">
-      <button className="logo" onClick={() => setPage(RegisterPage.None)}>
+      <IconButton className="logo" onClick={() => setPage(RegisterPage.None)}>
         <Logo />
-      </button>
+      </IconButton>
       <h1 className="title">Log in</h1>
-      <button className="instead" onClick={() => setPage(RegisterPage.Signup)}>
+      <IconButton className="instead" onClick={() => setPage(RegisterPage.Signup)}>
         Sign up instead
-      </button>
+      </IconButton>
       <LoginForm />
       <a href="/forgot">Forgot password?</a>
     </div>
@@ -101,13 +102,13 @@ const Login = ({ setPage }) => {
 const Signup = ({ setPage }) => {
   return (
     <div className="page signup">
-      <button className="logo" onClick={() => setPage(RegisterPage.None)}>
+      <IconButton className="logo" onClick={() => setPage(RegisterPage.None)}>
         <Logo />
-      </button>
+      </IconButton>
       <h1 className="title">Sign up</h1>
-      <button className="instead" onClick={() => setPage(RegisterPage.Login)}>
+      <IconButton className="instead" onClick={() => setPage(RegisterPage.Login)}>
         Log in instead
-      </button>
+      </IconButton>
       <SignupForm />
       <a href="/forgot">Forgot password?</a>
     </div>
@@ -146,7 +147,7 @@ export const IndexPage = injectSheet(IndexPageStyles)(({ classes }) => {
     <>
       <Helmet>
         <title>Discordium</title>
-        <meta name="description" content="Secure your chats - homepage" />
+        <meta name="description" content="Secure your chats - home page" />
       </Helmet>
       <div className={classes.wrapper}>
         <div className="brand">
