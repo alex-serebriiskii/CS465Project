@@ -1,6 +1,20 @@
 import { minMedium } from "../constants.js";
 
 export const IndexPageStyles = {
+  error: {
+    background: 'var(--red-1)',
+    color: 'white',
+    padding: '1em',
+    fontWeight: '800',
+    width: 'fit-content',
+    margin: {
+      top: '1em',
+      bottom: '0',
+      left: 'auto',
+      right: 'auto',
+    },
+    borderBottom: '0.25em solid var(--red)',
+  },
   wrapper: {
     "& .brand": {
       padding: {

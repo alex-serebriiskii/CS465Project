@@ -13,6 +13,8 @@ import injectSheet from "react-jss";
 
 import { __bp_medium__ } from '../constants.js';
 
+import { useQuery } from '../hooks/useQuery.js';
+
 const RegisterPage = Object.freeze({
   None: 0,
   Login: 1,
@@ -131,6 +133,9 @@ export const IndexPage = injectSheet(IndexPageStyles)(({ classes }) => {
     return () => window.removeEventListener('resize', handler);
   });
 
+  const params = useQuery();
+  const error = params.get('error');
+
   return (
     <>
       <Helmet>
@@ -146,6 +151,11 @@ export const IndexPage = injectSheet(IndexPageStyles)(({ classes }) => {
           <p>
             Secure <b>your</b> chats
           </p>
+          {error &&
+          <div className={classes.error}>
+            {error}
+          </div>
+          }
         </div>
         <div className="buttons">
           <div>

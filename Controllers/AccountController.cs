@@ -1,5 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
+using System.Web;
+using System;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Discordium
@@ -15,32 +17,23 @@ namespace Discordium
 		public ActionResult Login(UserModel model)
 		{
 			if (_authService.Login(model)){
+				// TODO: set cookie?
+				return LocalRedirect("/chat");
 				//return successs
-				return new JsonResult(new{
-					OkResult=true
-				});
 			}
-			return new JsonResult(new{
-					OkResult=false
-			});
+			return LocalRedirect("/?error="+HttpUtility.UrlEncode("Error, unable to login"));
 			//return failure
 		}
 
-		public ActionResult Register(UserModel model)
+		public LocalRedirectResult Register(UserModel model)
 		{
 			if (_authService.Register(model)){
-				return new JsonResult(new{
-					OkResult=true
-				});
+				// TODO: set cookie?
+				return LocalRedirect("/chat");
 				//return success
 			}
-			return new JsonResult(new{
-					OkResult=true
-			});
+			return LocalRedirect("/?error="+HttpUtility.UrlEncode("Error, unable to register"));
 			//return failure
 		}
-
-		
-		
 	}
 }
