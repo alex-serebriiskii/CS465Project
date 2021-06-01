@@ -2,6 +2,9 @@ namespace Discordium
 {
 	public class UserModel 
 	{
+		public UserModel(){
+			
+		}
 		public UserModel(string uname,string pwd)
 		{
 			username=uname;

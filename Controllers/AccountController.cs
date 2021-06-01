@@ -7,10 +7,11 @@ namespace Discordium
 	public class AccountController : Controller
 	{
 		private IAuthService _authService;
-		public AccountController(AuthService authService)
+		public AccountController(IAuthService authService)
 		{
 			_authService=authService;
 		}
+
 		public ActionResult Login(UserModel model)
 		{
 			if (_authService.Login(model)){
@@ -25,7 +26,7 @@ namespace Discordium
 			//return failure
 		}
 
-		public ActionResult CreateAccount(UserModel model)
+		public ActionResult Register(UserModel model)
 		{
 			if (_authService.Register(model)){
 				return new JsonResult(new{

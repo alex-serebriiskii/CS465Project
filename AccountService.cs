@@ -10,7 +10,7 @@ namespace Discordium
 		private Dictionary<string, AccountModel> accounts;
 		private string acctfile;
 
-		AuthService()
+		public AuthService()
 		{
 			acctfile = "./accounts.csv";
 			accounts = new Dictionary<string, AccountModel>();
@@ -70,7 +70,9 @@ namespace Discordium
 			prf: KeyDerivationPrf.HMACSHA1,
 			iterationCount: 10000,
 			numBytesRequested: 256 / 8));
+
 			AccountModel accountModel = new AccountModel(model.username, hashed, Convert.ToBase64String(salt));
+			accounts.Add(accountModel.username,accountModel);
 			SaveAccountToFile(accountModel);
 			return true;
 		}
