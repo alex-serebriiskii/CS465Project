@@ -4,6 +4,7 @@ import { Form, Formik } from "formik";
 import { Button } from "./Button.jsx";
 import { FormField } from "./FormField.jsx";
 import * as Yup from "yup";
+import { Helmet } from "react-helmet";
 
 import { ForgotPasswordPageStyles } from "../jss/ForgotPasswordPage.js";
 
@@ -40,13 +41,19 @@ const ForgotForm = () => {
 export const ForgotPasswordPage = injectSheet(ForgotPasswordPageStyles)((props) => {
   const { classes } = props;
   return (
-    <div className={classes.wrapper}>
-      <a href="/">
-        <Logo />
-        Home
-      </a>
-      <h1>Forgot password?</h1>
-      <ForgotForm />
-    </div>
+    <>
+      <Helmet>
+        <title>Forgot password</title>
+        <meta name="description" content="Secure your chats - forgot password page" />
+      </Helmet>
+      <div className={classes.wrapper}>
+        <a href="/">
+          <Logo />
+          Home
+        </a>
+        <h1>Forgot password?</h1>
+        <ForgotForm />
+      </div>
+    </>
   );
 });
