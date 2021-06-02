@@ -1,19 +1,17 @@
 import * as Yup from "yup";
 
 import { Form, Formik } from "formik";
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 import { Button } from "./Button.jsx";
-import { IconButton } from "./IconButton.jsx";
 import { FormField } from "./FormField.jsx";
 import { Helmet } from "react-helmet";
+import { IconButton } from "./IconButton.jsx";
 import { IndexPageStyles } from "../jss/IndexPage.js";
 import Logo from "../svg/logo.svg";
+import { __bp_medium__ } from "../constants.js";
 import injectSheet from "react-jss";
-
-import { __bp_medium__ } from '../constants.js';
-
-import { useQuery } from '../hooks/useQuery.js';
+import { useQuery } from "../hooks/useQuery.js";
 
 const RegisterPage = Object.freeze({
   None: 0,
@@ -41,7 +39,12 @@ const LoginForm = () => {
       }}
     >
       {({ handleSubmit, isSubmitting, errors, touched }) => (
-        <Form onSubmit={handleSubmit} action="/accounts/login" method="POST" ref={formEl}>
+        <Form
+          onSubmit={handleSubmit}
+          action="/accounts/login"
+          method="POST"
+          ref={formEl}
+        >
           <FormField name="Username" touched={touched} errors={errors} />
           <FormField name="Password" touched={touched} errors={errors} />
           <Button color="red" type="submit" disabled={isSubmitting}>
@@ -76,7 +79,12 @@ const SignupForm = () => {
       }}
     >
       {({ handleSubmit, isSubmitting, errors, touched }) => (
-        <Form onSubmit={handleSubmit} action="/accounts/register" method="POST" ref={formEl}>
+        <Form
+          onSubmit={handleSubmit}
+          action="/accounts/register"
+          method="POST"
+          ref={formEl}
+        >
           <FormField name="Username" touched={touched} errors={errors} />
           <FormField name="Password" touched={touched} errors={errors} />
           <FormField name="Confirm" touched={touched} errors={errors} />
@@ -96,7 +104,10 @@ const Login = ({ setPage }) => {
         <Logo />
       </IconButton>
       <h1 className="title">Log in</h1>
-      <IconButton className="instead" onClick={() => setPage(RegisterPage.Signup)}>
+      <IconButton
+        className="instead"
+        onClick={() => setPage(RegisterPage.Signup)}
+      >
         Sign up instead
       </IconButton>
       <LoginForm />
@@ -112,7 +123,10 @@ const Signup = ({ setPage }) => {
         <Logo />
       </IconButton>
       <h1 className="title">Sign up</h1>
-      <IconButton className="instead" onClick={() => setPage(RegisterPage.Login)}>
+      <IconButton
+        className="instead"
+        onClick={() => setPage(RegisterPage.Login)}
+      >
         Log in instead
       </IconButton>
       <SignupForm />
@@ -143,14 +157,14 @@ export const IndexPage = injectSheet(IndexPageStyles)(({ classes }) => {
       }
     };
 
-    window.addEventListener('resize', handler);
+    window.addEventListener("resize", handler);
     handler();
 
-    return () => window.removeEventListener('resize', handler);
+    return () => window.removeEventListener("resize", handler);
   });
 
   const params = useQuery();
-  const error = params.get('error');
+  const error = params.get("error");
 
   return (
     <>
@@ -167,11 +181,7 @@ export const IndexPage = injectSheet(IndexPageStyles)(({ classes }) => {
           <p>
             Secure <b>your</b> chats
           </p>
-          {error &&
-          <div className={classes.error}>
-            {error}
-          </div>
-          }
+          {error && <div className={classes.error}>{error}</div>}
         </div>
         <div className="buttons">
           <div>

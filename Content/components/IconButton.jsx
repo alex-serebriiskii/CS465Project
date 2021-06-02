@@ -1,7 +1,6 @@
+import { IconButtonStyles } from "../jss/IconButton.js";
 import React from "react";
 import injectSheet from "react-jss";
-
-import { IconButtonStyles } from "../jss/IconButton.js";
 
 export const IconButton = injectSheet(IconButtonStyles)((props) => {
   const { classes, children } = props;

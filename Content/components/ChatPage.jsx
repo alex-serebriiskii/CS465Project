@@ -1,27 +1,27 @@
-import React, { useState, useRef, useEffect } from "react";
-import injectSheet from "react-jss";
-import { Form, Field, ErrorMessage, Formik } from "formik";
-import { IconButton } from "./IconButton.jsx";
 import * as Yup from "yup";
-import { Helmet } from "react-helmet";
-import { HubConnectionBuilder } from '@microsoft/signalr';
-import { parseISO, format } from "date-fns";
+
+import { ErrorMessage, Field, Form, Formik } from "formik";
+import React, { useEffect, useRef, useState } from "react";
+import { format, parseISO } from "date-fns";
 
 import { ChatPageStyles } from "../jss/ChatPage.js";
-
+import { Helmet } from "react-helmet";
+import { HubConnectionBuilder } from "@microsoft/signalr";
+import { IconButton } from "./IconButton.jsx";
 import Logo from "../svg/logo.svg";
 import Logout from "../svg/logout.svg";
-import PlusButton from "../svg/plus-button.svg";
 import Microphone from "../svg/microphone.svg";
 import MicrophoneMuted from "../svg/microphone-muted.svg";
+import PlusButton from "../svg/plus-button.svg";
 import SendArrow from "../svg/send-arrow.svg";
+import injectSheet from "react-jss";
 
 const DoLogout = () => {
-  alert('logout');
+  alert("logout");
 };
 
 const displayDate = (d) => {
-  return format(parseISO(d), 'MMMM d, yyyy hh:mm a');
+  return format(parseISO(d), "MMMM d, yyyy hh:mm a");
 };
 
 const Header = () => {
@@ -32,7 +32,7 @@ const Header = () => {
         <Logout />
       </IconButton>
     </div>
-  )
+  );
 };
 
 const Message = ({ message }) => {
@@ -43,7 +43,7 @@ const Message = ({ message }) => {
       <p className="time">{displayDate(time)}</p>
       <p className="text">{text}</p>
     </div>
-  )
+  );
 };
 
 const Messages = ({ messages, newMessage }) => {
@@ -52,25 +52,27 @@ const Messages = ({ messages, newMessage }) => {
       <div className="messages empty">
         <span>No messages yet...</span>
       </div>
-    )
+    );
   }
 
   return (
-    <div className={`messages ${newMessage ? 'new' : ''}`}>
-      {messages.map((message, i) => <Message key={i} message={message}/>)}
+    <div className={`messages ${newMessage ? "new" : ""}`}>
+      {messages.map((message, i) => (
+        <Message key={i} message={message} />
+      ))}
     </div>
-  )
+  );
 };
 
 const MessageSchema = Yup.object().shape({
-  message: Yup.string().min(1).max(512).required('Cannot send empty message'),
+  message: Yup.string().min(1).max(512).required("Cannot send empty message"),
 });
 
 const ChatInput = ({ sendMessage }) => {
   const [muted, setMuted] = useState(false);
 
   const handlePlusClick = () => {
-    alert('plus clicked');
+    alert("plus clicked");
   };
 
   const handleMicrophoneClicked = () => {
@@ -89,7 +91,7 @@ const ChatInput = ({ sendMessage }) => {
         </IconButton>
       </div>
       <Formik
-        initialValues={{ message: '' }}
+        initialValues={{ message: "" }}
         validationSchema={MessageSchema}
         onSubmit={(values, { resetForm }) => {
           sendMessage(values.message);
@@ -101,7 +103,12 @@ const ChatInput = ({ sendMessage }) => {
             <p>
               <ErrorMessage name="message" />
             </p>
-            <Field type="text" as="textarea" placeholder="Send a message..." name="message" />
+            <Field
+              type="text"
+              as="textarea"
+              placeholder="Send a message..."
+              name="message"
+            />
             <IconButton type="submit" disabled={isSubmitting}>
               <SendArrow />
             </IconButton>
@@ -109,23 +116,23 @@ const ChatInput = ({ sendMessage }) => {
         )}
       </Formik>
     </div>
-  )
+  );
 };
-
 
 export const ChatPage = injectSheet(ChatPageStyles)((props) => {
   const { classes } = props;
 
-  const [ connection, setConnection ] = useState(null);
-  const [ messages, setMessages ] = useState([]);
-  const [ newMessage, setNewMessage ] = useState(false);
+  const [connection, setConnection] = useState(null);
+  const [messages, setMessages] = useState([]);
+  const [newMessage, setNewMessage] = useState(false);
+  const [tempname] = useState(Math.random().toString(36).substring(10));
   const latestChat = useRef(null);
 
   latestChat.current = messages;
 
   useEffect(() => {
     const newConnection = new HubConnectionBuilder()
-      .withUrl('/messages')
+      .withUrl("/messages")
       .withAutomaticReconnect()
       .build();
 
@@ -143,9 +150,10 @@ export const ChatPage = injectSheet(ChatPageStyles)((props) => {
   useEffect(() => {
     if (connection) {
       // TODO: Properly handle error
-      connection.start()
+      connection
+        .start()
         .then(() => {
-          connection.on('ReceiveMessage', message => {
+          connection.on("ReceiveMessage", (message) => {
             // TODO: add a little blip to notify user of new message
             const updatedChat = [...latestChat.current];
             updatedChat.push(message);
@@ -154,25 +162,25 @@ export const ChatPage = injectSheet(ChatPageStyles)((props) => {
             setMessages(updatedChat);
           });
         })
-        .catch(e => console.log('Connection failed: ', e));
+        .catch((e) => console.log("Connection failed: ", e));
     }
   }, [connection]);
 
   const sendMessage = (text) => {
     const message = {
-      user: 'username',
+      user: tempname,
       text: text,
-      time: (new Date()).toISOString(),
+      time: new Date().toISOString(),
     };
 
     if (connection.connectionStarted) {
       // TODO: Properly handle error
-      connection.send('SendMessage', message).catch(e => console.log(e));
+      connection.send("SendMessage", message).catch((e) => console.log(e));
     } else {
       // TODO: Properly handle error (spinner?)
-      alert('No connection to server yet.');
+      alert("No connection to server yet.");
     }
-  }
+  };
 
   return (
     <>

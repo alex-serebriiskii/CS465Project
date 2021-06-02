@@ -1,7 +1,7 @@
 export const FormFieldStyles = {
   wrapper: {
-    display: 'flex',
-    flexDirection: 'column',
+    display: "flex",
+    flexDirection: "column",
     color: "var(--gray-3)",
     "& label": {
       margin: "0.25em 0",
