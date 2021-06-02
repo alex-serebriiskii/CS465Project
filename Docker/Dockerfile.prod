@@ -1,0 +1,37 @@
+FROM mcr.microsoft.com/dotnet/sdk:5.0 AS build-env
+WORKDIR /app
+
+ARG BUILD_CONFIGURATION=Release
+ENV ASPNETCORE_ENVIRONMENT=Production
+ENV ASPNETCORE_URLS=http://+:80
+
+RUN apt-get upgrade
+RUN apt-get update
+RUN apt-get install -y npm unzip
+
+EXPOSE 9456
+EXPOSE 9457
+EXPOSE 9458
+
+RUN curl -fsSL https://fnm.vercel.app/install | bash
+RUN . /root/.bashrc && \
+  /root/.fnm/fnm install 14
+
+# Copy csproj and restore as distinct layers
+COPY *.csproj ./
+RUN dotnet restore
+
+# Copy everything else and build
+COPY ./ ./
+RUN . /root/.bashrc && \
+  /root/.fnm/fnm use 14 && \
+  dotnet publish -c Release -o out
+
+# Build runtime image
+#FROM mcr.microsoft.com/dotnet/aspnet:3.1
+#WORKDIR /app
+#COPY --from=build-env /app/out .
+
+RUN ls -al /app/out
+
+ENTRYPOINT ["dotnet", "/app/out/Discordium.dll"]
