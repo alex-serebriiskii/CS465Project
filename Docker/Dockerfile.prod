@@ -9,10 +9,6 @@ RUN apt-get upgrade
 RUN apt-get update
 RUN apt-get install -y npm unzip
 
-EXPOSE 9456
-EXPOSE 9457
-EXPOSE 9458
-
 RUN curl -fsSL https://fnm.vercel.app/install | bash
 RUN . /root/.bashrc && \
   /root/.fnm/fnm install 14

@@ -1,8 +1,8 @@
 services:
   app:
     build:
-      context: ./Docker
-      dockerfile: Dockerfile.dev
+      context: .
+      dockerfile: ./Docker/Dockerfile.dev
     privileged: true
     ports:
       - "9456:9456"
