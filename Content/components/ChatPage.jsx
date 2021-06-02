@@ -118,6 +118,7 @@ export const ChatPage = injectSheet(ChatPageStyles)((props) => {
 
   const [ connection, setConnection ] = useState(null);
   const [ messages, setMessages ] = useState([]);
+  const [tempname,setTempName]=useState(Math.random().toString(36).substring(10))
   const latestChat = useRef(null);
 
   latestChat.current = messages;
@@ -149,8 +150,9 @@ export const ChatPage = injectSheet(ChatPageStyles)((props) => {
   }, [connection]);
 
   const sendMessage = (text) => {
+    
     const message = {
-      user: 'username',
+      user: tempname,
       text: text,
       time: (new Date()).toISOString(),
     };
