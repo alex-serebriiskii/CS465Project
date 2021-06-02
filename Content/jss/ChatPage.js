@@ -22,6 +22,11 @@ export const ChatPageStyles = {
       flexDirection: 'column',
       alignItems: 'center',
       overflowY: 'scroll',
+      borderBottom: '1em inset transparent',
+      transition: '250ms',
+      '&.new': {
+        borderBottom: '1em inset var(--red)',
+      },
       '&.empty': {
         justifyContent: 'center',
         '& span': {

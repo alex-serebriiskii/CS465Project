@@ -5,7 +5,7 @@ import { IconButton } from "./IconButton.jsx";
 import * as Yup from "yup";
 import { Helmet } from "react-helmet";
 import { HubConnectionBuilder } from '@microsoft/signalr';
-import { parseISO, formatDistanceToNow } from "date-fns";
+import { parseISO, format } from "date-fns";
 
 import { ChatPageStyles } from "../jss/ChatPage.js";
 
@@ -21,7 +21,7 @@ const DoLogout = () => {
 };
 
 const displayDate = (d) => {
-  return formatDistanceToNow(parseISO(d), { addSuffix: true, includeSeconds: true });
+  return format(parseISO(d), 'MMMM d, yyyy hh:mm a');
 };
 
 const Header = () => {
@@ -46,7 +46,7 @@ const Message = ({ message }) => {
   )
 };
 
-const Messages = ({ messages }) => {
+const Messages = ({ messages, newMessage }) => {
   if (messages.length === 0) {
     return (
       <div className="messages empty">
@@ -56,7 +56,7 @@ const Messages = ({ messages }) => {
   }
 
   return (
-    <div className="messages">
+    <div className={`messages ${newMessage ? 'new' : ''}`}>
       {messages.map((message, i) => <Message key={i} message={message}/>)}
     </div>
   )
@@ -118,6 +118,7 @@ export const ChatPage = injectSheet(ChatPageStyles)((props) => {
 
   const [ connection, setConnection ] = useState(null);
   const [ messages, setMessages ] = useState([]);
+  const [ newMessage, setNewMessage ] = useState(false);
   const latestChat = useRef(null);
 
   latestChat.current = messages;
@@ -132,6 +133,14 @@ export const ChatPage = injectSheet(ChatPageStyles)((props) => {
   }, []);
 
   useEffect(() => {
+    if (newMessage) {
+      const timeout = setTimeout(() => setNewMessage(false), 500);
+      return () => clearTimeout(timeout);
+    }
+    return;
+  }, [newMessage]);
+
+  useEffect(() => {
     if (connection) {
       // TODO: Properly handle error
       connection.start()
@@ -141,6 +150,7 @@ export const ChatPage = injectSheet(ChatPageStyles)((props) => {
             const updatedChat = [...latestChat.current];
             updatedChat.push(message);
 
+            setNewMessage(true);
             setMessages(updatedChat);
           });
         })
@@ -177,7 +187,7 @@ export const ChatPage = injectSheet(ChatPageStyles)((props) => {
       </Helmet>
       <div className={classes.wrapper}>
         <Header />
-        <Messages messages={messages} />
+        <Messages messages={messages} newMessage={newMessage} />
         <ChatInput sendMessage={sendMessage} />
       </div>
     </>
