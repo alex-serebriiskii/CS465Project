@@ -1,7 +1,7 @@
 import * as Yup from "yup";
 
 import { Form, Formik } from "formik";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 
 import { Button } from "./Button.jsx";
 import { IconButton } from "./IconButton.jsx";
@@ -27,13 +27,21 @@ const LoginFormSchema = Yup.object().shape({
 });
 
 const LoginForm = () => {
+  // Workaround since Formik does not run validation before doing default form actions
+  // since validation runs asynchronously.
+  // See more: https://github.com/formium/formik/issues/556#issuecomment-472047486
+  const formEl = useRef(null);
+
   return (
     <Formik
       initialValues={{ username: "", password: "" }}
       validationSchema={LoginFormSchema}
+      onSubmit={() => {
+        formEl.current.submit();
+      }}
     >
-      {({ onSubmit, isSubmitting, errors, touched }) => (
-        <Form onSubmit={onSubmit} action="/accounts/login" method="POST">
+      {({ handleSubmit, isSubmitting, errors, touched }) => (
+        <Form onSubmit={handleSubmit} action="/accounts/login" method="POST" ref={formEl}>
           <FormField name="Username" touched={touched} errors={errors} />
           <FormField name="Password" touched={touched} errors={errors} />
           <Button color="red" type="submit" disabled={isSubmitting}>
@@ -54,13 +62,21 @@ const SignupFormSchema = Yup.object().shape({
 });
 
 const SignupForm = () => {
+  // Workaround since Formik does not run validation before doing default form actions
+  // since validation runs asynchronously.
+  // See more: https://github.com/formium/formik/issues/556#issuecomment-472047486
+  const formEl = useRef(null);
+
   return (
     <Formik
       initialValues={{ username: "", password: "", confirm: "" }}
       validationSchema={SignupFormSchema}
+      onSubmit={() => {
+        formEl.current.submit();
+      }}
     >
-      {({ onSubmit, isSubmitting, errors, touched }) => (
-        <Form onSubmit={onSubmit} action="/accounts/register" method="POST">
+      {({ handleSubmit, isSubmitting, errors, touched }) => (
+        <Form onSubmit={handleSubmit} action="/accounts/register" method="POST" ref={formEl}>
           <FormField name="Username" touched={touched} errors={errors} />
           <FormField name="Password" touched={touched} errors={errors} />
           <FormField name="Confirm" touched={touched} errors={errors} />
