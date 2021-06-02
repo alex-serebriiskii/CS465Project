@@ -9,20 +9,22 @@ import { Helmet } from "react-helmet";
 import Logo from "../svg/logo.svg";
 import React from "react";
 import injectSheet from "react-jss";
+import { useHistory } from "react-router-dom";
 
 const ForgotFormSchema = Yup.object().shape({
   username: Yup.string().min(3).max(24).required("Required"),
 });
 
 const ForgotForm = () => {
+  const history = useHistory();
   return (
     <Formik
       initialValues={{ username: "" }}
       validationSchema={ForgotFormSchema}
       onSubmit={(values, { setSubmitting }) => {
         setTimeout(() => {
-          alert(JSON.stringify(values, null, 2));
           setSubmitting(false);
+          history.push('/');
         }, 400);
       }}
     >
@@ -30,7 +32,7 @@ const ForgotForm = () => {
         <Form onSubmit={handleSubmit}>
           <FormField name="Username" touched={touched} errors={errors} />
           <Button color="blue" type="submit" disabled={isSubmitting}>
-            Send email
+            Reset
           </Button>
         </Form>
       )}

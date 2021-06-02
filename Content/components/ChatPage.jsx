@@ -15,20 +15,22 @@ import MicrophoneMuted from "../svg/microphone-muted.svg";
 import PlusButton from "../svg/plus-button.svg";
 import SendArrow from "../svg/send-arrow.svg";
 import injectSheet from "react-jss";
-
-const DoLogout = () => {
-  alert("logout");
-};
+import { useHistory } from "react-router-dom";
 
 const displayDate = (d) => {
   return format(parseISO(d), "MMMM d, yyyy hh:mm a");
 };
 
 const Header = () => {
+  const history = useHistory();
   return (
     <div className="header">
       <Logo />
-      <IconButton onClick={DoLogout}>
+      <IconButton onClick={() =>
+          setTimeout(() => {
+            history.push('/');
+          }, 400)
+        }>
         <Logout />
       </IconButton>
     </div>
