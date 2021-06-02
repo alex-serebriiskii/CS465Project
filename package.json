@@ -15,6 +15,7 @@
     "dev": "dotnet watch run"
   },
   "dependencies": {
+    "@microsoft/signalr": "^5.0.6",
     "emotion": "^9.2.12",
     "emotion-server": "^9.2.12",
     "formik": "^2.2.8",
@@ -41,6 +42,7 @@
     "babel-eslint": "^10.1.0",
     "babel-loader": "8.0.6",
     "babel-runtime": "6.26.0",
+    "date-fns": "^2.22.1",
     "eslint": "^7.27.0",
     "eslint-plugin-react": "^7.23.2",
     "eslint-plugin-react-hooks": "^4.2.0",

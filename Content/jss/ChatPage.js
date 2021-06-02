@@ -16,8 +16,34 @@ export const ChatPageStyles = {
       alignItems: 'center',
     },
     '& .messages': {
-      height: '100%',
-      background: 'gray',
+      width: '100%',
+      height: 'calc(100% - 60px)',
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      overflowY: 'scroll',
+      '&.empty': {
+        justifyContent: 'center',
+        '& span': {
+          color: 'white',
+        },
+      },
+      '& .message': {
+        width: '100%',
+        padding: '0.25em',
+        borderBottom: '1px solid var(--gray)',
+        '& .user': {
+          color: 'var(--blue-2)',
+          fontWeight: '800',
+        },
+        '& .time': {
+          color: 'var(--gray)',
+          fontSize: '0.9em',
+        },
+        '& .text': {
+          color: 'var(--gray-3)',
+        },
+      },
     },
     '& .chat-input': {
       height: __chat_height__,
